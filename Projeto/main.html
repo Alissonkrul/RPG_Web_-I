@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="functions.js"></script>
+
+	</head>
+	<body>
+		<table class="locations" align="center">
+			<tr>
+				<td id="yard"><button data-id="0">Pátio</button></td>
+				<td id="woods"><button data-id="1">Bosque</button></td>
+				<td id="sec_floor"><button data-id="2">2º Andar</button></td>
+				<td id="gym"><button data-id="3">Ginásio</button></td>
+			</tr>
+		</table>
+
+		<div id="chat" style="background:black; color:white; padding:5; display:none" >
+			
+			<div class="speach"></div>
+			
+			<table class="answer"></table>
+			
+			
+		</div>
+		<div align="center">
+			<button class="person" data-id="1">Giba</button>
+			<button class="person" data-id="2">Pedro</button>
+			<button class="person" data-id="3">Neto</button>
+			<button class="person" data-id="4">Vigilante</button>
+			<button class="person" data-id="5">Nakamura</button>
+			<button class="person" data-id="6">Paulo</button>
+			<button class="person" data-id="7">Russo</button>
+			<button class="person" data-id="8">Renato</button>
+		</div>
+
+
+		
+
+		<script type="text/javascript">
+
+		var person;
+
+		$(".person").click(function(){
+
+			person = $(this).data("id");
+
+			dialog(person, avatar.first[person]);
+
+			$("#chat").show();
+
+			$(".person").hide();	
+
+		});
+
+
+
+		$(".answer").on("click","button",function(){
+
+			var option = $(this).data("id");
+
+			if(option === 0){
+				avatar.first[person] = 1;
+			}
+
+			$(".dialog").remove();
+
+			
+			if($.isNumeric(text[person].answer[option][1][0])){
+				dialog(person, text[person].answer[option][1][0]);
+			}else{
+				for(var i=0; i<text[person].answer[option][1].length; i++){
+					action(text[person].answer[option][1][i], person);
+				}					
+			}
+						
+			
+
+		});
+
+
+		$(".locations").on("click","button",function(){
+
+			var map = $(this).data("id");
+
+			if(locations[map] === true){
+				alert('Mapa aberto');
+			}else{
+				alert('Mapa fechado');
+			}
+			
+
+		});
+
+		</script>
+			
+	</body>
+</html>
